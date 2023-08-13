@@ -16,7 +16,7 @@ services:
       - DB_HOST=db
       - DB_NAME=devdb
       - DB_USER=devuser
-      - DB_PASS=changeme___
+      - DB_PASS=changeme
     depends_on:
       - db
 
@@ -29,5 +29,5 @@ services:
       - POSTGRES_USER=devuser
       - POSTGRES_PASSWORD=changeme
 
-  volumes:
-    dev-db-data:
+volumes:
+  dev-db-data:
