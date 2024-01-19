@@ -105,11 +105,11 @@ class BaseRecipeAttrViewSet(mixins.DestroyModelMixin,
     def get_queryset(self):
         """Filter querryset to authenticated user"""
         assigned_only = bool(
-            int(self.request.querry_params.get('assigned_only', 0))
+            int(self.request.query_params.get('assigned_only', 0))
         )
         queryset = self.queryset
         if assigned_only:
-            queryset = queryset.filter(recipe_isnull=False)
+            queryset = queryset.filter(recipe__isnull=False)
 
         return queryset.filter(user=self.request.user).order_by('-name').distinct()
 
