@@ -53,7 +53,7 @@ def create_user(**params):
 class PublicRecipeAPITests(TestCase):
     """Test unauthenticated API requests."""
 
-    def setUP(self):
+    def setUp(self):
         self.client = APIClient()
 
     def test_auth_required(self):
@@ -63,7 +63,7 @@ class PublicRecipeAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
-class PrivateRecipeAPITests(TestCase):
+class PrivateRecipeApiTests(TestCase):
     """Test authenticated API requests."""
 
     def setUp(self):
@@ -72,7 +72,7 @@ class PrivateRecipeAPITests(TestCase):
 
         self.client.force_authenticate(self.user)
 
-    def test_retrive_recipes(self):
+    def test_retrieve_recipes(self):
         """Test retrieving a list o recipes"""
         create_recipe(user=self.user)
         create_recipe(user=self.user)
@@ -385,7 +385,7 @@ class PrivateRecipeAPITests(TestCase):
     def test_filter_by_ingredients(self):
         """Test filtering recipes by ingredients"""
         r1 = create_recipe(user=self.user, title='Posh Beans on Toast')
-        r2 = create_recipe(user=self.user, title='Chicken Caccitore')
+        r2 = create_recipe(user=self.user, title='Chicken Cacciatore')
         in1 = Ingredient.objects.create(user=self.user, name='Feta Cheese')
         in2 = Ingredient.objects.create(user=self.user, name='Chicken')
         r1.ingredients.add(in1)
